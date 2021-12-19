@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django To Do List</title>
+</head>
+<body>
+    <h1>Things that I need to do:</h1>
+    <!-- This is a template variable calling the items from the Item model-->
+    <!-- This will respond with a Django QuerySet (list)-->
+    <table>
+        <!-- FOR each item with the items table/model -->
+        {% for item in items %}
+            <tr>
+                {% if item.done %}
+                    <!-- Calls the name, if done strikes it out -->
+                    <td><strike>{{ item.name }}</strike></td>
+                {% else %}
+                    <!-- if not done, displays undone/unstriked -->
+                    <td>{{ item.name }}</td>
+                {% endif %}
+                <td>
+                    <a href="/toggle/{{ item.id }}">
+                        <button>Toggle</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/edit/{{ item.id }}">
+                        <button>Edit</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/delete/{{ item.id }}">
+                        <button>Delete</button>
+                    </a>
+                </td>
+            </tr>
+        <!-- If there are no tasks left (all deleted), using empty will display a message-->
+        {% empty %}
+        <tr><td>All of your tasks are completed!</td></tr>
+        {% endfor %}
+    </table>
+    <!-- Connects to add an item page-->
+    <a href="/add">Add an Item</a>
+</body>
+</html>
