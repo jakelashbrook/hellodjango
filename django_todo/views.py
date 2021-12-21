@@ -8,9 +8,9 @@ from .forms import ItemForm
 def get_todo_list(request):
     items = Item.objects.all()
     context = {
-        'items' : items
+        'items': items
     }
-    return render(request, 'todo/todo_list.html', context)
+    return render(request, 'django_todo/todo_list.html', context)
 
 
 def add_item(request):
@@ -23,7 +23,7 @@ def add_item(request):
     context = {
         'form': form
     }
-    return render(request, 'todo/add_item.html', context)
+    return render(request, 'django_todo/add_item.html', context)
 
 
 def edit_item(request, item_id):
@@ -37,7 +37,7 @@ def edit_item(request, item_id):
     context = {
         'form': form
     }
-    return render(request, 'todo/edit_item.html', context)
+    return render(request, 'django_todo/edit_item.html', context)
 
 
 def toggle_item(request, item_id):
